@@ -1,0 +1,60 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.card{
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 379px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 70px 63px -40px #000;
+    /* background: url("https://freight.cargo.site/t/original/i/6e90ef32471e05d8bfd029d6d5877119439b23c2989a55cf182b99c54303f4fa/MS_Musk_Elon_CloseUp.jpg") center center no-repeat;
+    background-size: 380px; */
+    overflow: hidden;
+    transition: 1s;
+}
+.name{
+    margin: 6px;
+    color: #ffffff;
+    /* mix-blend-mode:exclusion; */
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 10px black;
+   
+}
+.info{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    translate: -50% 0;
+    font-weight: 700;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 1s;
+}
+.border{
+    position: relative;
+    height: 364px;
+    width: 285px;
+    border: 1px solid #343434;
+    border-radius: 10px;
+    transition: opacity 1s;
+    opacity: 0;
+}
+.card:hover .name,
+.card:hover .info,
+.card:hover .border{
+    opacity: 1;
+}
+/* .card:hover{
+    background: url("https://freight.cargo.site/t/original/i/6e90ef32471e05d8bfd029d6d5877119439b23c2989a55cf182b99c54303f4fa/MS_Musk_Elon_CloseUp.jpg") left center  no-repeat;
+    background-size: 600px;
+} */
