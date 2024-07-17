@@ -1,3 +1,9 @@
+import Contact from '@/components/Contact'
+import Footer from '@/components/Footer'
+import Mainbtn from '@/components/Mainbtn'
+import SwiperComponent from '@/components/Swipwer'
+
+
 import React from 'react'
 
 export default function index() {
@@ -65,30 +71,92 @@ export default function index() {
         </div>
       </div>
     </div>
-    <div className="flex justify-center bg-black">
-      <div className="max-w-[1200px] mt-[52px] mx-auto flex w-full justify-center lg:p-5 md:p-5">
-        <div className="w-full px-5">
-          <div className="flex flex-col items-center gap-8 px-14 md:px-5 sm:px-4">
-            <h2 className="sm:text-[28px] md:text-[30px] text-white lg:text-[42px] text-[36px] tracking-[1.50px] font-semibold !text-white-a700">
-              СКУЛЬПТУРА &amp; АРТ
-            </h2>
-            <p className="lg:text-[13px] text-[16px] text-white tracking-[1.50px] text-center font-light leading-6 !text-white-a700">
-              Классическое искусство — наша слабость. Оставаясь с ним
-              <br />
-              наедине, вы рискуете быть прикованным взглядом и всем
-              <br />
-              нутром. Оно будоражит и не дает шанса остаться
-              <br />
-              равнодушным. И как же прекрасно осознавать, что шедевры,
-              <br />
-              прошедшие через века, от гениев возрождения или
-              <br />
-              голландских провокаторов, можно носить на своем теле.
-            </p>
-          </div>
+    <div>
+        <div className="flex justify-center bg-black">
+        <div className="max-w-[1200px] mt-[52px] mx-auto flex w-full justify-center lg:p-5 md:p-5">
+            <div className="w-full px-5">
+            <div className="flex flex-col items-center gap-8 px-14 md:px-5 sm:px-4">
+                <h2 className="sm:text-[28px] md:text-[30px] text-white lg:text-[42px] text-[36px] tracking-[1.50px] font-semibold !text-white-a700">
+                СКУЛЬПТУРА &amp; АРТ
+                </h2>
+                <p className="lg:text-[13px] text-[16px] text-white tracking-[1.50px] text-center font-light leading-6 !text-white-a700">
+                Классическое искусство — наша слабость. Оставаясь с ним
+                <br />
+                наедине, вы рискуете быть прикованным взглядом и всем
+                <br />
+                нутром. Оно будоражит и не дает шанса остаться
+                <br />
+                равнодушным. И как же прекрасно осознавать, что шедевры,
+                <br />
+                прошедшие через века, от гениев возрождения или
+                <br />
+                голландских провокаторов, можно носить на своем теле.
+                </p>
+            </div>
+            </div>
         </div>
-      </div>
+        </div>
+        <SwiperComponent/>
     </div>
+    <div>
+        <div className="flex justify-center bg-black">
+        <div className="max-w-[1200px] mt-[52px] mx-auto flex w-full justify-center lg:p-5 md:p-5">
+            <div className="w-full px-5">
+            <div className="flex flex-col items-center gap-8 px-14 md:px-5 sm:px-4">
+                <h2 className="sm:text-[28px] md:text-[30px] text-white lg:text-[42px] text-[36px] tracking-[1.50px] font-semibold !text-white-a700">
+                СКУЛЬПТУРА &amp; АРТ
+                </h2>
+                <p className="lg:text-[13px] text-[16px] text-white tracking-[1.50px] text-center font-light leading-6 !text-white-a700">
+                Классическое искусство — наша слабость. Оставаясь с ним
+                <br />
+                наедине, вы рискуете быть прикованным взглядом и всем
+                <br />
+                нутром. Оно будоражит и не дает шанса остаться
+                <br />
+                равнодушным. И как же прекрасно осознавать, что шедевры,
+                <br />
+                прошедшие через века, от гениев возрождения или
+                <br />
+                голландских провокаторов, можно носить на своем теле.
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+        <SwiperComponent/>
+    </div>
+    <div>
+        <div className="flex justify-center bg-black">
+        <div className="max-w-[1200px] mt-[52px] mx-auto flex w-full justify-center lg:p-5 md:p-5">
+            <div className="w-full px-5">
+            <div className="flex flex-col items-center gap-8 px-14 md:px-5 sm:px-4">
+                <h2 className="sm:text-[28px] md:text-[30px] text-white lg:text-[42px] text-[36px] tracking-[1.50px] font-semibold !text-white-a700">
+                СКУЛЬПТУРА &amp; АРТ
+                </h2>
+                <p className="lg:text-[13px] text-[16px] text-white tracking-[1.50px] text-center font-light leading-6 !text-white-a700">
+                Классическое искусство — наша слабость. Оставаясь с ним
+                <br />
+                наедине, вы рискуете быть прикованным взглядом и всем
+                <br />
+                нутром. Оно будоражит и не дает шанса остаться
+                <br />
+                равнодушным. И как же прекрасно осознавать, что шедевры,
+                <br />
+                прошедшие через века, от гениев возрождения или
+                <br />
+                голландских провокаторов, можно носить на своем теле.
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+        <SwiperComponent/>
+    </div>
+    <div className='bg-grey-light w-full h-[180px] flex justify-center items-center'>
+            <Mainbtn color='black' text='Вернуться на главную'/>
+    </div>
+    <Contact/>
+    <Footer/>
     </>
   )
 }

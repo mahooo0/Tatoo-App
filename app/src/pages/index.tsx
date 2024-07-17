@@ -124,7 +124,7 @@ export default function Home() {
         <h5 className="text-white font-sans font-[500] text-[36px]">Местоположения</h5>
         <h5 className="text-white font-sans font-[500] text-[24px]">Azerbaijan - baku - babek.p 42a</h5>
         <h5 className="text-white font-sans font-[500] text-[24px]">metro : koroğlu </h5>
-        <h5 className="text-white font-sans font-[500] text-[24px]">Мы открыты: 12:00 – 20:00, без выходных </h5>
+        <h5 className="text-white font-sans font-[500] text-[24px]">Мы открыты: 12:00 – 20:00, без выходных</h5>
     </div>
     <Map/>
     <Footer/>
