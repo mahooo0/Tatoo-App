@@ -18,6 +18,7 @@ function Panel3(props:Props) {
         mutationFn: PostStyle,
         onSuccess: () => {
           alert('User successfully added!');
+          setShow(false)
         },
         onError: (error: Error) => {
           alert(`An error occurred: ${error.message}`);

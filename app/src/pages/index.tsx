@@ -104,7 +104,7 @@ export default function Home() {
       <div className="w-[90%] flex flex-row justify-around flex-wrap mt-12">
         <MasteerCard2 img="https://freight.cargo.site/t/original/i/6e90ef32471e05d8bfd029d6d5877119439b23c2989a55cf182b99c54303f4fa/MS_Musk_Elon_CloseUp.jpg" />
         <MasteerCard2 img='https://i.pinimg.com/564x/9c/bf/f3/9cbff31fe90e1dd97e25a9e993a9f0f1.jpg'/>
-        <MasteerCard2 img="https://media.cnn.com/api/v1/images/stellar/prod/210604151110-02-platon-nft-iris-series-restricted.jpg?q=w_2000,c_fill"/>
+        <MasteerCard2 img="https://imgix.ranker.com/user_node_img/568/11345473/original/11345473-photo-u-2032380962?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375"/>
       </div>
       <div className="w-[90%] flex flex-row justify-around flex-wrap mt-12">
         
