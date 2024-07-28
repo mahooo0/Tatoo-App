@@ -51,3 +51,21 @@ export const GetTatoo= async()=>{
   return response
   
 }
+//-------------Delete Master--------------
+export const DeleteMasters= async(id:string)=>{
+  let response= await axiosInstance.delete(`Masters/${id}`,)
+  return response
+  
+}
+//-------------Delete Tatoo--------------
+export const DeleteTatoo= async(id:string)=>{
+  let response= await axiosInstance.delete(`Tatoos/${id}`,)
+  return response
+  
+}
+//-------------Delete Style--------------
+export const DeleteStyle= async(id:string)=>{
+  let response= await axiosInstance.delete(`Styles/${id}`,)
+  return response
+  
+}

@@ -5,6 +5,7 @@ import ColseIcons from '../../public/svg/Close.svg'
 import { PostStyle } from '@/Services';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
  interface Props{
     Show:boolean,
     setShow:any,
@@ -18,6 +19,7 @@ function Panel3(props:Props) {
         mutationFn: PostStyle,
         onSuccess: () => {
           alert('User successfully added!');
+          toast.success("art successfully added!")
           setShow(false)
         },
         onError: (error: Error) => {

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import HeadBg from '../../public/Images/Les encres de tatouages sont-elles nocives_.jpeg'
+import mapImg from '../../public/Images/Screenshot 2024-07-27 214934.png'
 import PhelasofyBg from '../../public/Images/phelasofy.jpeg'
 import strelkaIcon from '../../public/svg/strelka.svg'
 import WkontakteIcon from '../../public/svg/wkontakte.svg'
@@ -13,10 +14,19 @@ import Works from "@/components/Works";
 import Map from "@/components/map";
 import MasteerCard2 from "@/components/MasterCard2";
 import Footer from "@/components/Footer";
+import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+import { MasterType } from "@/Services/Types";
+import { chunkArray } from "@/Helpers/chunkArray";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home(props:any) {
+  let ruter =useRouter()
+  let {data}=props
+  let Master=chunkArray(data.Masters,3)
+
+  
   return (
     <>
     <div className=" relative">
@@ -40,7 +50,7 @@ export default function Home() {
     </div>
     <div className=" w-full bg-black h- flex flex-col items-center pb-8">
       <div className="flex flex-row gap-9 mt-9">
-        <a href="">
+        <a href="https://wa.me/+9940552660728">
           <div className="bg-white  rounded-full w-[50px] h-[50px] flex justify-center items-center ">
             <Image
             src={WkontakteIcon}
@@ -48,7 +58,7 @@ export default function Home() {
             />
           </div>
         </a>
-        <a href="">
+        <a href="https://www.instagram.com/mah0o00">
           <div className="bg-white  rounded-full w-[50px] h-[50px] flex justify-center items-center ">
             <Image
             src={instagramIcon}
@@ -70,7 +80,8 @@ export default function Home() {
       <h2 className=" text-white font-sans font-[700] text-[36px] leading-[93px] mt-[24px]">Cтоимость Tату</h2>
       <p className=" text-white font-sans font-[700] text-[16px] leading-[30px]  w-[45%] text-center">Стоимость татуировки зависит от нескольких важных факторов, с которыми мы поможем определиться.</p>
       <p className=" text-white font-sans font-[700] text-[16px] leading-[30px]  mb-4 w-[45%] text-center">Жми на кнопку, чтобы получить консультацию и рассчитать цену своей идеальной татуировки.</p>
-      <Mainbtn text="Рассчитать стоимость" color="gray"/>
+      <a href="https://wa.me/+9940552660728"><Mainbtn text="Рассчитать стоимость" color="gray" action={()=>{}}/></a>
+      
     </div>
     <div className="w-full h-[690px] bg-black flex flex-row" >
         <div className="w-1/2 flex justify-center">
@@ -100,34 +111,51 @@ export default function Home() {
     <div className="  w-full flex flex-col items-center mb-8">
       <h1 className="text-black font-sans font-[700] text-[36px] mt-12">Наша команда</h1>
       <p className=" text-grey font-sans font-[300] text-[24px] leading-[30px] mt-5 mb-4 w-[45%] text-center">Портфолио наших тату-мастеров</p>
+      {Master?.map((item:any)=>(
+      <div className="w-[90%] flex flex-row justify-around flex-wrap mt-12">
+              {item?.map((item:MasterType)=>(<MasterCard name={item.name} img={item.img_url} styles={item.styles}/>))}
+      {/* <MasterCard/>
+        <MasterCard/>
+        <MasterCard/> */}
+      </div>
+      ))}
 
-      <div className="w-[90%] flex flex-row justify-around flex-wrap mt-12">
-        <MasteerCard2 img="https://freight.cargo.site/t/original/i/6e90ef32471e05d8bfd029d6d5877119439b23c2989a55cf182b99c54303f4fa/MS_Musk_Elon_CloseUp.jpg" />
-        <MasteerCard2 img='https://i.pinimg.com/564x/9c/bf/f3/9cbff31fe90e1dd97e25a9e993a9f0f1.jpg'/>
-        <MasteerCard2 img="https://imgix.ranker.com/user_node_img/568/11345473/original/11345473-photo-u-2032380962?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375"/>
-      </div>
-      <div className="w-[90%] flex flex-row justify-around flex-wrap mt-12">
-        
-        <MasteerCard2 img="https://imgix.ranker.com/user_node_img/568/11345473/original/11345473-photo-u-2032380962?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375"/>
-        <MasteerCard2  img="https://freight.cargo.site/t/original/i/6e90ef32471e05d8bfd029d6d5877119439b23c2989a55cf182b99c54303f4fa/MS_Musk_Elon_CloseUp.jpg"/>
-        <MasteerCard2  img="https://freight.cargo.site/t/original/i/6e90ef32471e05d8bfd029d6d5877119439b23c2989a55cf182b99c54303f4fa/MS_Musk_Elon_CloseUp.jpg"/>
-      </div>
+     
       <div className=" flex flex-col items-center">
         <h2 className="text-black font-sans font-[700] text-[36px] mt-16 ">стили и сюжеты</h2>
         <p className=" font-sans  text-[16px]  leading-[35px] font-[700px text-grey w-3/4 tracking-wide text-center  mb-9">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</p>
-        <Mainbtn color="black" text="Смотреть"/>
+        <Mainbtn color="black" text="Смотреть"action={()=>{ruter.push("/Style")}}/>
       </div>
     </div>
     <Contact/>
-    <Works/>
+    <Works data={data?.Tatoos}/>
     <div  className="bg-black w-full h-fit  flex flex-col gap-9 items-center pt-20">
         <h5 className="text-white font-sans font-[500] text-[36px]">Местоположения</h5>
         <h5 className="text-white font-sans font-[500] text-[24px]">Azerbaijan - baku - babek.p 42a</h5>
         <h5 className="text-white font-sans font-[500] text-[24px]">metro : koroğlu </h5>
         <h5 className="text-white font-sans font-[500] text-[24px]">Мы открыты: 12:00 – 20:00, без выходных</h5>
     </div>
-    <Map/>
+    <a href="https://www.google.com/maps/place/Tattoo+%26+Coffee+(Tin+Too)/@10.025635,105.7736981,17.69z/data=!40m6!3m5!1s0x31a0883e83ee58eb:0x22defee7d3b6a056!8m2!3d10.0256019!4d105.7748851!16s%2Fg%2F11g7292s04?entry=ttu" className="w-full h-[500px] flex justify-center items-center overflow-hidden">
+      <Image src={mapImg} alt="a" className="w-full"/>
+    </a>
+    {/* <Map/> */}
     <Footer/>
     </>
   );
 }
+export const getServerSideProps: GetServerSideProps = async () => {
+
+  const MastersRes = await fetch('http://localhost:3000/api/Masters');
+  const TatoosRes = await fetch('http://localhost:3000/api/Tatoos');
+ 
+  const MastersData = await MastersRes.json();
+  const TatoosData = await TatoosRes.json();
+  let data ={ Masters:MastersData , Tatoos:TatoosData}
+  
+
+  return {
+    props: {
+      data,
+    },
+  };
+};

@@ -6,6 +6,7 @@ import ImageUpload from './ImageApload'
 import { StyleType } from '@/Services/Types'
 import { useMutation } from '@tanstack/react-query';
 import { PostMaster } from '@/Services'
+import { toast } from 'react-toastify'
 interface Props{
     show:boolean,
     setShow:any,
@@ -27,7 +28,8 @@ export default function Panel1(props:Props) {
     const mutation = useMutation({
         mutationFn: PostMaster,
         onSuccess: () => {
-          alert('User successfully added!');
+          // alert('User successfully added!');
+          toast.success("artist successfully added!")
           nameInpRef.current.value=""
           philosofyInpRef.current.value=""
           setstyleList([])

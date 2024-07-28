@@ -1,9 +1,10 @@
 // pages/api/getCollection.js
 
 import { useParams } from 'next/navigation';
-import { db } from '../../../lib/firebase';
+import { database, db } from '../../../lib/firebase';
 import { doc, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
-
+import { deleteData } from '../../../Helpers/deleteData';
+import { ref, remove } from 'firebase/database';
 export default async function getCollection(req, res) {
   switch (req.method) {
     case 'GET':
@@ -45,8 +46,10 @@ export default async function getCollection(req, res) {
     case 'DELETE':
       try {
         const { id } = req.query;
-        const docRef = doc(db, 'styles', id);
+    
+        const docRef = doc(db, 'Masters', id);
         await deleteDoc(docRef);
+        
         res.status(200).json({ message: 'Document deleted successfully' });
       } catch (error) {
         res.status(500).json({ error: 'Failed to delete document' });

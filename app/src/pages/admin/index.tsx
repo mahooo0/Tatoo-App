@@ -8,17 +8,21 @@ import ColseIcons from '../../../public/svg/Close.svg'
 import Mainbtn from '@/components/Mainbtn'
 import Panel3 from '@/components/Panel3'
 import { GetMasters, GetStyle, GetTatoo } from '@/Services'
-
+import 'react-toastify/dist/ReactToastify.css';
 import Panel1 from '@/components/Panel1'
-import { MasterType, StyleType, TatoType } from '@/Services/Types'
+import { DeleteDataType, MasterType, MasterTypeBase, StyleType, TatoType, TatoTypeBase } from '@/Services/Types'
 import Panel2 from '@/components/Panel2'
+import { ToastContainer } from 'react-toastify'
+import DeletePanlet from '@/components/DeletePanlet'
 
 export default function index() {
     let [RequestReser,setRequestReser]=useState<boolean>(false)
     let [Data,setData]=useState<any>()
+    let [Deleteobj,setDeleteobj]=useState<DeleteDataType>({collectionName:"",id:""})
     let [showpanel1,setshowpanel1]=useState(false)
     let [showpanel2,setshowpanel2]=useState(false)
     let [showpanel3,setshowpanel3]=useState(false)
+    let [Deletepanel,setDeletepanel]=useState(false)
     
     useEffect(()=>{
     (async()=>{
@@ -38,7 +42,7 @@ export default function index() {
         
     })()
     },[RequestReser])
-console.log(Data);
+console.log(Deleteobj);
 
     
   return (
@@ -59,7 +63,7 @@ console.log(Data);
               </tr>
             </thead>
             <tbody>
-                {Data?.Masters?.map((item:MasterType)=>(
+                {Data?.Masters?.map((item:MasterTypeBase)=>(
                       <tr className=' border-b-2 border-[#868686] '>
                       <th className='w-1/5 border-r border-[#868686] text-black text-[36px] font-sans font-[400]'>{item.name}</th>
                         <th className='w-[15%] border-r border-[#868686]  '>
@@ -75,7 +79,7 @@ console.log(Data);
                                 <p className='w-4/5 text-[#696969] text-[20px] font-sans font-[700]'>{item.styles.map((item:StyleType)=>`${item.name} ,`)}</p>
                                 <div className='w-1/5 flex flex-row gap-2 pr-4'>
                                 <Image src={EditIcon} alt='EditIcon'/>
-                                <Image src={DeleteIcon} alt='DeleteIcon'/>
+                                <Image src={DeleteIcon} alt='DeleteIcon' onClick={()=>{setDeleteobj({collectionName:"Masters",id:item.id}),setDeletepanel(true)}}/>
                                 </div>
                             </div>
                              </th>
@@ -90,7 +94,7 @@ console.log(Data);
             <button className='w-[200px] h-[48px] bg-black text-white rounded-2xl' onClick={()=>setshowpanel2(true)}> добавить</button>
         </div>
         <div className=' mt-6 flex flex-row flex-wrap gap-6 justify-center'>
-            {Data?.Tatoo.map((item:TatoType)=>(
+            {Data?.Tatoo.map((item:TatoTypeBase)=>(
                 <div className='bg-white relative w-[304px] h-[114px] border-black border-2 flex flex-row items-center'>
                 {/* <Image src={image} alt='skd' className=' w-[110px]  h-[110px]'/> */}
                 <img src={item.img_url} alt="" className=' w-[110px]  h-[110px]'/>
@@ -100,7 +104,7 @@ console.log(Data);
                 </div>
                 <div className='w-1/5  absolute top-2 right-2 flex flex-row gap-2 pr-4'>
                         <Image src={EditIcon} alt='EditIcon'/>
-                        <Image src={DeleteIcon} alt='DeleteIcon'/>
+                        <Image src={DeleteIcon} alt='DeleteIcon' onClick={()=>{setDeleteobj({collectionName:"Tatoos",id:item.id}),setDeletepanel(true)}}/>
                         </div>
             </div>
             ))}
@@ -121,7 +125,7 @@ console.log(Data);
                 </div>
                 <div className='w-1/5  absolute top-2 right-2 flex flex-row gap-2 pr-4'>
                         <Image src={EditIcon} alt='EditIcon'/>
-                        <Image src={DeleteIcon} alt='DeleteIcon'/>
+                        <Image src={DeleteIcon} alt='DeleteIcon' onClick={()=>{setDeleteobj({collectionName:"Styles",id:item.id}),setDeletepanel(true)}}/>
                         </div>
             </div>
             ))}  
@@ -132,8 +136,10 @@ console.log(Data);
         <Panel2 setshow={setshowpanel2} Styles={Data?.Style} Masters={Data?.Masters} show={showpanel2}/>
         {/* panel3 */}
           <Panel3 Show={showpanel3} setShow={setshowpanel3}/>
-          {/* <ImageUpload/> */}
+          {/*Delete panel */}
+          <DeletePanlet setShow={setDeletepanel} Show={Deletepanel} collectionName={Deleteobj.collectionName} id={Deleteobj?.id} />
     </div>
+    <ToastContainer />
     </>
   )
 }

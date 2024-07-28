@@ -7,6 +7,7 @@ import AddPhotoIcon from '../../public/svg/addPhotoIcons.svg'
 import { MasterType, StyleType } from '@/Services/Types'
 import ImageUpload from './ImageApload'
 import { PostTatoo } from '@/Services';
+import { toast } from 'react-toastify';
 interface Props{
     show:boolean,
     setshow:(par:boolean)=>void,
@@ -23,6 +24,7 @@ export default function Panel2(props:Props) {
     const mutation = useMutation({
         mutationFn: PostTatoo,
         onSuccess: () => {
+            toast.success("art successfully added!")
           alert('User successfully added!');
           setshow(false)
           setReset((prew)=>!prew)
