@@ -6,14 +6,16 @@ import Image from 'next/image';
 import AddPhotoIcon from '../../public/svg/addPhotoIcons.svg'
 interface Props{
   seturl:(url:string)=>void,
-  reset:boolean
+  reset:boolean,
+  editImg?:string
+
 }
 
 const ImageUpload = (props:Props) => {
-  let{seturl,reset}=props
+  let{seturl,reset,editImg}=props
   const [image, setImage] = useState<any>(null);
   const [url, setUrl] = useState('');
-
+  
   useEffect(()=>{setImage(null),setUrl(""),seturl("")},[reset])
   const handleImageChange = (e:any) => {
     if (e.target.files[0]) {
@@ -33,11 +35,11 @@ const ImageUpload = (props:Props) => {
     });
   };
   useEffect(()=>{handleUpload()},[image])
-
   return (
     
     <div className=' relative w-[111px] h-[87px] flex items-center'>
-      {url? <img src={url} alt='AddPhotoIcon' />:<Image src={AddPhotoIcon} alt='AddPhotoIcon' />}
+      {editImg?<img src={editImg} alt='AddPhotoIcon' />:url? <img src={url} alt='AddPhotoIcon' />:<Image src={AddPhotoIcon} alt='AddPhotoIcon' />}
+      
       {/* <Image src={AddPhotoIcon} alt='AddPhotoIcon' /> */}
       <input type="file" onChange={handleImageChange}  className=' absolute w-full h-full top-0 z-10 opacity-0'/>
       
