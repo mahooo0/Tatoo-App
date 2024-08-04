@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import Mainbtn from './Mainbtn';
 import Image from 'next/image';
 import ColseIcons from '../../public/svg/Close.svg';
@@ -12,15 +18,16 @@ import { RootState } from '@/Store/rootReducer';
 import { setshowpanel1 } from '@/Store/Slices/adminslice';
 interface Props {
     styles: any;
-    editData?: any;
+
     onClose?: (par: any) => void;
 }
 
 type Styles = StyleType[];
 export default function Panel1(props: Props) {
     let [showstyles, setshowstyles] = useState(false);
-    let { styles, editData = undefined } = props;
+    let { styles } = props;
     let [styleList, setstyleList] = useState<Styles>([]);
+
     let [Imgurl, setImgurl] = useState<string>('');
     let nameInpRef = useRef<any>();
     let philosofyInpRef = useRef<any>();
@@ -28,17 +35,8 @@ export default function Panel1(props: Props) {
     // console.log(editData);
     let dispatch = useDispatch();
     const ReduxState = useSelector((state: RootState) => state?.example);
-
-    useEffect(() => {
-        nameInpRef.current.value = editData?.name;
-        philosofyInpRef.current.value = editData?.desc;
-        setstyleList(editData ? editData.styles : []);
-
-        return () => {
-            console.log('leave');
-        };
-    }, []);
-    console.log(styleList);
+    let editItem = ReduxState?.editData?.data;
+    console.log(editItem);
 
     const mutation = useMutation({
         mutationFn: PostMaster,
@@ -78,7 +76,15 @@ export default function Panel1(props: Props) {
         mutation.mutate(newMater);
     };
 
-    if (editData) {
+    if (
+        ReduxState.editData &&
+        ReduxState.editData.ColloctionName === 'Masters'
+    ) {
+        nameInpRef.current.value = editItem.name;
+        philosofyInpRef.current.value = editItem.desc;
+        if (styleList.length === 0) {
+            setstyleList(editItem.styles);
+        }
         return (
             <div
                 className="w-full h-[700px]   fixed top-0   left-0  flex justify-center items-center"
@@ -96,7 +102,7 @@ export default function Panel1(props: Props) {
                         <ImageUpload
                             reset={resetImg}
                             seturl={setImgurl}
-                            editImg={editData.img_url}
+                            editImg={ReduxState.editData.data.img_url}
                         />
                     </div>
                     <div className="flex flex-col w-full px-12">
@@ -158,7 +164,7 @@ export default function Panel1(props: Props) {
                                                     StyleAction(item)
                                                 }
                                             >
-                                                {styleList.includes(item)
+                                                {editItem.styles.includes(item)
                                                     ? '-'
                                                     : '+'}
                                             </span>

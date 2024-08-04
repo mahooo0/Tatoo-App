@@ -5,6 +5,7 @@ import DeleteIcon from '../../../public/svg/deleteIcon.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Store/rootReducer';
 import {
+    seteditData,
     setshowpanel1,
     setshowpanel2,
     setshowpanel3,
@@ -26,7 +27,7 @@ import { ToastContainer } from 'react-toastify';
 import DeletePanlet from '@/components/DeletePanlet';
 
 export default function index() {
-    let [RequestReser, setRequestReser] = useState<boolean>(false);
+    let [RequestReset, setRequestReset] = useState<boolean>(false);
     let [Data, setData] = useState<any>();
     let [Deleteobj, setDeleteobj] = useState<DeleteDataType>({
         collectionName: '',
@@ -36,7 +37,7 @@ export default function index() {
     // let [showpanel2,setshowpanel2]=useState(false)
     // let [showpanel3, setshowpanel3] = useState(false);
     let [Deletepanel, setDeletepanel] = useState(false);
-    let [editData, seteditdata] = useState<any>(null);
+    // let [editData, seteditdata] = useState<any>(null);
 
     useEffect(() => {
         (async () => {
@@ -52,13 +53,12 @@ export default function index() {
                 Tatoo,
             };
             setData(data);
-            console.log(data);
         })();
-    }, [RequestReser]);
+    }, [RequestReset]);
     // console.log(editData);
     const dispatch = useDispatch();
     const ReduxState = useSelector((state: RootState) => state?.example);
-    // console.log(value);
+    console.log(ReduxState.editData);
     // () => dispatch(setshowpanel1())
 
     return (
@@ -128,13 +128,16 @@ export default function index() {
                                                 src={EditIcon}
                                                 alt="EditIcon"
                                                 onClick={() => {
-                                                    seteditdata({
-                                                        data: item,
-                                                        col: 'Masters',
-                                                    }),
-                                                        dispatch(
-                                                            setshowpanel1(true)
-                                                        );
+                                                    dispatch(
+                                                        seteditData({
+                                                            ColloctionName:
+                                                                'Masters',
+                                                            data: item,
+                                                        })
+                                                    );
+                                                    dispatch(
+                                                        setshowpanel1(true)
+                                                    );
                                                 }}
                                             />
                                             <Image
@@ -243,12 +246,7 @@ export default function index() {
                     ))}
                 </div>
                 {/* panel 1*/}
-                <Panel1
-                    editData={
-                        editData?.col === 'Masters' ? editData.data : undefined
-                    }
-                    styles={Data?.Style}
-                />
+                <Panel1 styles={Data?.Style} />
                 {/* panel2 */}
                 <Panel2 Styles={Data?.Style} Masters={Data?.Masters} />
                 {/* panel3 */}
