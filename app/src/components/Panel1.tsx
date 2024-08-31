@@ -9,9 +9,9 @@ import Mainbtn from './Mainbtn';
 import Image from 'next/image';
 import ColseIcons from '../../public/svg/Close.svg';
 import ImageUpload from './ImageApload';
-import { StyleType } from '@/Services/Types';
+import {MasterType, StyleType} from '@/Services/Types';
 import { useMutation } from '@tanstack/react-query';
-import { PostMaster } from '@/Services';
+import {PostMaster,  PutMasters} from '@/Services';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/Store/rootReducer';
@@ -26,8 +26,9 @@ type Styles = StyleType[];
 export default function Panel1(props: Props) {
     let [showstyles, setshowstyles] = useState(false);
     let { styles } = props;
+    let btnref = useRef<any>();
     let [styleList, setstyleList] = useState<Styles>([]);
-
+    let editSectRef = useRef<any>();
     let [Imgurl, setImgurl] = useState<string>('');
     let nameInpRef = useRef<any>();
     let philosofyInpRef = useRef<any>();
@@ -36,7 +37,7 @@ export default function Panel1(props: Props) {
     let dispatch = useDispatch();
     const ReduxState = useSelector((state: RootState) => state?.example);
     let editItem = ReduxState?.editData?.data;
-    console.log(editItem);
+    // console.log(editItem);
 
     const mutation = useMutation({
         mutationFn: PostMaster,
@@ -55,6 +56,8 @@ export default function Panel1(props: Props) {
             alert(`An error occurred: ${error.message}`);
         },
     });
+
+
     const addItem = (item: StyleType) => {
         setstyleList((prev) => [...prev, item]);
     };
@@ -74,6 +77,23 @@ export default function Panel1(props: Props) {
             styles: styleList,
         };
         mutation.mutate(newMater);
+    };
+    const onEdit = () => {
+        let name = nameInpRef.current.value;
+        let desc = philosofyInpRef.current.value;
+        let newMaster = {
+            name,
+            desc,
+            img_url: Imgurl ? Imgurl : ReduxState.editData?.data.img_url,
+            styles: styleList,
+        };
+
+        let id =ReduxState.editData?.data.id
+        PutMasters(newMaster,id).then(()=>{
+            console.log("edited")
+        })
+
+
     };
 
     if (
@@ -102,7 +122,11 @@ export default function Panel1(props: Props) {
                         <ImageUpload
                             reset={resetImg}
                             seturl={setImgurl}
-                            editImg={ReduxState.editData.data.img_url}
+                            editImg={
+                                Imgurl
+                                    ? Imgurl
+                                    : ReduxState.editData?.data.img_url
+                            }
                         />
                     </div>
                     <div className="flex flex-col w-full px-12">
@@ -140,7 +164,7 @@ export default function Panel1(props: Props) {
                             <h1 className="font-sans font-[400] text-[24px] ">
                                 стили
                             </h1>
-                            <div className="border border-black w-[150px] text-center  bg-[#d9d9d9] flex justify-around">
+                            {/* <div className="border border-black w-[150px] text-center  bg-[#d9d9d9] flex justify-around">
                                 style{' '}
                                 <span
                                     onClick={() =>
@@ -150,6 +174,7 @@ export default function Panel1(props: Props) {
                                     +
                                 </span>
                             </div>
+
                             <div>
                                 <div
                                     className={
@@ -171,10 +196,71 @@ export default function Panel1(props: Props) {
                                         </div>
                                     ))}
                                 </div>
+                            </div> */}
+                            <div className="flex flex-row">
+                                <form className="max-w-sm mx-auto">
+                                    <select
+                                        onChange={(e) => {
+                                            console.log(btnref);
+
+                                            styleList.some((item) =>
+                                                item.name === e.target.value
+                                                    ? (btnref.current.innerHTML =
+                                                          '-')
+                                                    : (btnref.current.innerHTML =
+                                                          '+')
+                                            );
+                                        }}
+                                        ref={editSectRef}
+                                        id="countries"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring--500 focus:border--500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring--500 dark:focus:border--500"
+                                    >
+                                        {styles.map((item: StyleType) => (
+                                            <option selected>
+                                                {item.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </form>
+                                <button
+                                    ref={btnref}
+                                    className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
+                                    onClick={() => {
+                                        let styleitem = styles.find(
+                                            (item: StyleType) => {
+                                                if (
+                                                    item.name ===
+                                                    editSectRef.current.value
+                                                ) {
+                                                    return true;
+                                                }
+                                            }
+                                        );
+                                        let result = styleList.some((item) =>
+                                            item.name === styleitem.name
+                                                ? true
+                                                : false
+                                        );
+                                        console.log(result);
+
+                                        if (result) {
+                                            removeItem(styleitem.id),
+                                                (btnref.current.innerHTML =
+                                                    '+');
+                                        } else {
+                                            addItem(styleitem),
+                                                (btnref.current.innerHTML =
+                                                    '-');
+                                        }
+                                    }}
+                                >
+                                    +
+                                </button>
                             </div>
                         </div>
+
                         <div className=" flex flex-row gap-2 pl-4">
-                            {styleList.map((item: StyleType) => (
+                            {styleList?.map((item: StyleType) => (
                                 <div className="w-[70px] h-[30px] bg-[#d9d9d9] rounded-2xl flex justify-center items-center">
                                     {item.name}
                                 </div>
@@ -186,7 +272,7 @@ export default function Panel1(props: Props) {
                             color="black"
                             text="Submit"
                             action={() => {
-                                onSubmit();
+                                onEdit();
                             }}
                         />
                     </div>
@@ -254,13 +340,61 @@ export default function Panel1(props: Props) {
                         <h1 className="font-sans font-[400] text-[24px] ">
                             стили
                         </h1>
-                        <div className="border border-black w-[150px] text-center  bg-[#d9d9d9] flex justify-around">
-                            style{' '}
-                            <span
-                                onClick={() => setshowstyles((prev) => !prev)}
+                        <div className="flex flex-row">
+                            <form className="max-w-sm mx-auto">
+                                <select
+                                    onChange={(e) => {
+                                        console.log(btnref);
+
+                                        styleList.some((item) =>
+                                            item.name === e.target.value
+                                                ? (btnref.current.innerHTML =
+                                                      '-')
+                                                : (btnref.current.innerHTML =
+                                                      '+')
+                                        );
+                                    }}
+                                    ref={editSectRef}
+                                    id="countries"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring--500 focus:border--500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring--500 dark:focus:border--500"
+                                >
+                                    {styles?.map((item: StyleType) => (
+                                        <option selected>{item.name}</option>
+                                    ))}
+                                </select>
+                            </form>
+                            <button
+                                ref={btnref}
+                                className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
+                                onClick={() => {
+                                    let styleitem = styles.find(
+                                        (item: StyleType) => {
+                                            if (
+                                                item.name ===
+                                                editSectRef.current.value
+                                            ) {
+                                                return true;
+                                            }
+                                        }
+                                    );
+                                    let result = styleList.some((item) =>
+                                        item.name === styleitem.name
+                                            ? true
+                                            : false
+                                    );
+                                    console.log(result);
+
+                                    if (result) {
+                                        removeItem(styleitem.id),
+                                            (btnref.current.innerHTML = '+');
+                                    } else {
+                                        addItem(styleitem),
+                                            (btnref.current.innerHTML = '-');
+                                    }
+                                }}
                             >
                                 +
-                            </span>
+                            </button>
                         </div>
                         <div>
                             <div
