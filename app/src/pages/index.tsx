@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import HeadBg from '../../public/Images/Les encres de tatouages sont-elles nocives_.jpeg';
 import mapImg from '../../public/Images/Screenshot 2024-07-27 214934.png';
-import PhelasofyBg from '../../public/Images/phelasofy.jpeg';
+import PhelasofyBg from '../../public/Images/Amazing 3D Tattoos That Will Make You Look Twice.jpeg';
 import strelkaIcon from '../../public/svg/strelka.svg';
 import WkontakteIcon from '../../public/svg/wkontakte.svg';
 import instagramIcon from '../../public/svg/intragram.svg';
@@ -26,7 +26,12 @@ export default function Home(props: any) {
     let ruter = useRouter();
     let { data } = props;
     let Master = chunkArray(data.Masters, 3);
-
+    const scrollToDiv = () => {
+        const element = document.getElementById('target-div');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
     return (
         <>
             <div className=" relative">
@@ -46,6 +51,7 @@ export default function Home(props: any) {
                             viewBox="0 -40.0758661020418 608.4050812660892 241.8758814055341"
                             width="1000"
                             height="400"
+                            className="w-full"
                         >
                             <g>
                                 <path
@@ -95,7 +101,10 @@ export default function Home(props: any) {
                         </p> */}
                     </div>
 
-                    <div className="absolute bottom-[40px] animate-bounce">
+                    <div
+                        className="absolute bottom-[40px] animate-bounce"
+                        onClick={scrollToDiv}
+                    >
                         <svg
                             role="presentation"
                             className="t-cover__arrow-svg"
@@ -118,147 +127,175 @@ export default function Home(props: any) {
                     /> */}
                 </div>
             </div>
-            <div className=" w-full bg-black h- flex flex-col items-center pb-8">
-                <div className="flex flex-row gap-9 mt-9">
-                    <a href="https://wa.me/+9940552660728">
-                        <div className="bg-white  rounded-full w-[50px] h-[50px] flex justify-center items-center ">
-                            <Image src={WkontakteIcon} alt="" />
-                        </div>
-                    </a>
-                    <a href="https://www.instagram.com/mah0o00">
-                        <div className="bg-white  rounded-full w-[50px] h-[50px] flex justify-center items-center ">
-                            <Image src={instagramIcon} alt="" />
-                        </div>
-                    </a>
-                    <a href="">
-                        <div className="bg-white  rounded-full w-[50px] h-[50px] flex justify-center items-center ">
-                            <Image
-                                src={telegramIcon}
-                                alt=""
-                                width={34}
-                                height={34}
-                            />
-                        </div>
+            <div
+                className="w-full bg-black  flex  justify-center"
+                id="target-div"
+            >
+                <div className=" max-w-[640px] flex flex-col items-center pb-8">
+                    <div className="flex flex-row gap-4 mt-[90px]">
+                        <a href="https://wa.me/+9940552660728">
+                            <div className="bg-white  rounded-full w-[50px] h-[50px] flex justify-center items-center ">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="#000000"
+                                    width="28px"
+                                    height="28px"
+                                    viewBox="-1.66 0 740.824 740.824"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"
+                                    />
+                                </svg>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/mah0o00">
+                            <div className="bg-white  rounded-full w-[50px] h-[50px] flex justify-center items-center ">
+                                <Image src={instagramIcon} alt="" />
+                            </div>
+                        </a>
+                        <a href="">
+                            <div className="bg-white  rounded-full w-[50px] h-[50px] flex justify-center items-center ">
+                                <Image
+                                    src={telegramIcon}
+                                    alt=""
+                                    width={28}
+                                    height={28}
+                                />
+                            </div>
+                        </a>
+                    </div>
+                    <h2 className=" text-white font-sans font-[500] tracking-[2.5px] text-[44px] leading-[1.23] mt-[60px]">
+                        CТОИМОСТЬ TАТУ
+                    </h2>
+                    <p className=" text-white font-sans font-[300] text-[16px] leading-[1.8] mt-7   text-center">
+                        Стоимость татуировки зависит от нескольких важных
+                        факторов, с которыми мы поможем определиться.
+                    </p>
+                    <p className=" text-white font-sans font-[300] text-[16px] leading-[1.5]  mb-4  text-center">
+                        Жми на кнопку, чтобы получить консультацию и рассчитать
+                        цену своей идеальной татуировки.
+                    </p>
+                    <a
+                        href="https://wa.me/+9940552660728"
+                        className="mt-[30px]"
+                    >
+                        <Mainbtn
+                            text="Рассчитать стоимость"
+                            color="gray"
+                            action={() => {}}
+                        />
                     </a>
                 </div>
-                <h2 className=" text-white font-sans font-[700] text-[36px] leading-[93px] mt-[24px]">
-                    Cтоимость Tату
-                </h2>
-                <p className=" text-white font-sans font-[700] text-[16px] leading-[30px]  w-[45%] text-center">
-                    Стоимость татуировки зависит от нескольких важных факторов,
-                    с которыми мы поможем определиться.
-                </p>
-                <p className=" text-white font-sans font-[700] text-[16px] leading-[30px]  mb-4 w-[45%] text-center">
-                    Жми на кнопку, чтобы получить консультацию и рассчитать цену
-                    своей идеальной татуировки.
-                </p>
-                <a href="https://wa.me/+9940552660728">
-                    <Mainbtn
-                        text="Рассчитать стоимость"
-                        color="gray"
-                        action={() => {}}
-                    />
-                </a>
             </div>
-            <div className="w-full h-[690px] bg-black flex flex-row">
+
+            <div className="w-full  bg-black flex flex-row">
                 <div className="w-1/2 flex justify-center">
-                    <div className="w-fit  relative">
+                    <div className="w-full  relative">
                         <Image
                             src={PhelasofyBg}
                             alt=""
-                            className="h-full w-auto"
+                            className="h-auto w-full"
+                            loading="lazy"
                         />
                         <div className="bg-custom-gradient h-full w-full absolute top-0"></div>
                     </div>
                 </div>
-                <div className="w-1/2 flex flex-col ">
-                    <h5 className=" text-white font-sans font-[400] text-[36px] mt-3">
-                        Философия
-                    </h5>
-                    <h6 className="text-white font-sans font-[300] text-[24px] leading-[50px] max-w-[500px] mt-6">
-                        Tatu App - это возможность записаться на прием удаленно
-                    </h6>
-                    <p className="text-white font-sans font-[300] text-[18px] leading-[35px] max-w-[500px] mt-6">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged.
-                        It was popularised in the 1960s with the release of
-                        Letraset .
-                    </p>
-                    <p className="text-white font-sans font-[300] text-[18px] leading-[35px] max-w-[500px] mt-6">
-                        Lorem Ipsum is sing, remaining essentially unchanged. It
-                        was popularised in the 1960s with the release of
-                        Letraset .
-                    </p>
+                <div className="w-1/2  flex items-center">
+                    <div className=" flex flex-col  m-[10%] mb-0">
+                        <h5 className=" text-white font-circe font-[400] text-[36px] tracking-[2px] mt-3">
+                            ФИЛАСОФИЯ
+                        </h5>
+                        <h6 className="text-white  font-[200] text-[18px] font-circe leading-[1.8]  max-w-[500px] mt-6">
+                            TATOO-APP - это возможность записаться на прием
+                            удаленно
+                        </h6>
+                        <p className="text-white font-circe font-[300] text-[20px] leading-[1.8] max-w-[500px] mt-6">
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry. Lorem Ipsum has been the
+                            industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and
+                            scrambled it to make a type specimen book. It has
+                            survived not only five centuries, but also the leap
+                            into electronic typesetting, remaining essentially
+                            unchanged. It was popularised in the 1960s with the
+                            release of Letraset .
+                        </p>
+
+                        <p
+                            id="skkskks"
+                            className="text-white font-circe font-[300] text-[18px] leading-[35px] max-w-[500px] mt-6 "
+                        >
+                            Lorem Ipsum is sing, remaining essentially
+                            unchanged. It was popularised in the 1960s with the
+                            release of Letraset .
+                        </p>
+                    </div>
                 </div>
             </div>
+
             <div className="  w-full flex flex-col items-center mb-8">
-                <h1 className="text-black font-sans font-[700] text-[36px] mt-12">
-                    Наша команда
+                <h1 className="text-black font-sans font-[700] text-[40px] mt-12 tracking-[1.5px]">
+                    НАША КОМАНДА
                 </h1>
-                <p className=" text-grey font-sans font-[300] text-[24px] leading-[30px] mt-5 mb-4 w-[45%] text-center">
+                <p className=" text-black font-sans font-[200] text-[22px] leading-[30px] mt-5 mb-4 w-[45%] text-center">
                     Портфолио наших тату-мастеров
                 </p>
-                {Master?.map((item: any) => (
-                    <div className="w-[90%] flex flex-row justify-around flex-wrap mt-12">
+                {Master?.map((item: any, i: number, list: any) => (
+                    <div className=" w-4/5 mx-[20%] flex flex-row   justify-start mt-12 flex-wrap">
                         {item?.map((item: MasterType) => (
                             <MasterCard
                                 name={item.name}
-                                img={item.img_url}
+                                img={list[0][0].img_url}
                                 styles={item.styles}
                             />
                         ))}
-                        {/* <MasterCard/>
-        <MasterCard/>
-        <MasterCard/> */}
                     </div>
                 ))}
-
-                <div className=" flex flex-col items-center">
-                    <h2 className="text-black font-sans font-[700] text-[36px] mt-16 ">
-                        стили и сюжеты
-                    </h2>
-                    <p className=" font-sans  text-[16px]  leading-[35px] font-[700px text-grey w-3/4 tracking-wide text-center  mb-9">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been
-                    </p>
-                    <Mainbtn
-                        color="black"
-                        text="Смотреть"
-                        action={() => {
-                            ruter.push('/Style');
-                        }}
-                    />
-                </div>
             </div>
+            <div className="w-full flex flex-col items-center mt-11 mb-[90px]">
+                <h2 className="text-black font-circe font-[700]  text-[40px]  tracking-[1.5px] ">
+                    СТИЛИ И СЮЖЕТЫ
+                </h2>
+                <p className=" font-sans  text-[16px]  leading-[35px] font-[700px] text-grey w-2/3 tracking-wide text-center mt-10  mb-9">
+                    Не бойся своих идей! Новая татуировка — это всегда
+                    волнительно. Идея часто не лежит на поверхности и порой
+                    приходится долго копаться в себе, но сделанный однажды выбор
+                    может вылиться в интересный проект, который станет
+                    неотъемлемой частью тебя.
+                </p>
+                <Mainbtn
+                    color="black"
+                    text="Выбрать стиль"
+                    action={() => {
+                        ruter.push('/Style');
+                    }}
+                />
+            </div>
+
             <Contact />
+
             <Works data={data?.Tatoos} />
-            <div className="bg-black w-full h-fit  flex flex-col gap-9 items-center pt-20">
-                <h5 className="text-white font-sans font-[500] text-[36px]">
-                    Местоположения
+
+            <div className="bg-black w-full h-fit  flex flex-col gap-9 items-center py-[120px]">
+                <h5 className="text-white font-sans font-[500] w-[580px] text-[36px] text-center">
+                    Новодмитровская ул., д. 1, стр. 1, Москва, метро Дмитровская
                 </h5>
-                <h5 className="text-white font-sans font-[500] text-[24px]">
-                    Azerbaijan - baku - babek.p 42a
-                </h5>
-                <h5 className="text-white font-sans font-[500] text-[24px]">
-                    metro : koroğlu{' '}
-                </h5>
-                <h5 className="text-white font-sans font-[500] text-[24px]">
+
+                <h5 className="text-white font-sans font-[300] text-[24px]">
                     Мы открыты: 12:00 – 20:00, без выходных
                 </h5>
             </div>
+            {/*
             <a
                 href="https://www.google.com/maps/place/Tattoo+%26+Coffee+(Tin+Too)/@10.025635,105.7736981,17.69z/data=!40m6!3m5!1s0x31a0883e83ee58eb:0x22defee7d3b6a056!8m2!3d10.0256019!4d105.7748851!16s%2Fg%2F11g7292s04?entry=ttu"
                 className="w-full h-[500px] flex justify-center items-center overflow-hidden"
             >
                 <Image src={mapImg} alt="a" className="w-full" />
             </a>
-            {/* <Map/> */}
-            <Footer />
+           
+            <Footer /> */}
         </>
     );
 }

@@ -17,7 +17,7 @@ const ImageSlider = () => {
     }, [slides.length]);
 
     return (
-        <div className="relative w-full  mx-auto overflow-hidden h-[690px]">
+        <div className="relative w-full  mx-auto overflow-hidden h-[100vh]">
             {slides.map((slide, index) => (
                 <div
                     key={index}
