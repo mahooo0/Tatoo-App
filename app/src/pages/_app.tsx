@@ -4,13 +4,13 @@ import { wrapper } from '../Store/intex'; // Adjust the path to where your store
 import '@/styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const queryClient = new QueryClient();
+    const queryClient = new QueryClient();
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-    </QueryClientProvider>
-  );
+    return (
+        <QueryClientProvider client={queryClient}>
+            <Component {...pageProps} />
+        </QueryClientProvider>
+    );
 }
 
 export default wrapper.withRedux(MyApp);

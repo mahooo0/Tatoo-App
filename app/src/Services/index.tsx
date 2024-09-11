@@ -4,7 +4,7 @@ import { MasterType, TatoType } from './Types';
 
 // Create an Axios instance with default configurations
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3000/api/', // replace with your base URL
+    baseURL: 'https://tatoo-app-back-end-naez.vercel.app/api/', //replace with your base URL
     timeout: 10000, // set a timeout if needed
     headers: {
         'Content-Type': 'application/json',
@@ -14,28 +14,41 @@ const axiosInstance = axios.create({
 
 //-------------Post Style--------------
 export const PostStyle = async (body: object) => {
-    let response = await axiosInstance.post('Styles', body);
+    let response = await axiosInstance.post('styles', body);
     return response.status;
 };
 //-------------Get Style--------------
 export const GetStyle = async () => {
-    let response = await axiosInstance.get('Styles');
+    let response = await axiosInstance.get('styles');
+    console.log(response);
+
     return response;
 };
-
+//-------------Delete Style--------------
+export const DeleteStyle = async (id: string) => {
+    let response = await axiosInstance.delete(`styles/${id}`);
+    return response;
+};
+//-------------Edit Style--------------
+export const EditStyle = async ({ id, body }: { id: string; body: object }) => {
+    let response = await axiosInstance.put(`styles/${id}`, body);
+    return response;
+};
 //-------------Post Master--------------
-export const PostMaster = async (body: MasterType) => {
-    let response = await axiosInstance.post('Masters', body);
-    return response.status;
+export const PostMaster = async (body: any) => {
+    let response = await axiosInstance.post('masters', body);
+    console.log(response);
+
+    return response;
 };
 //-------------Get Masters--------------
 export const GetMasters = async () => {
-    let response = await axiosInstance.get('Masters');
+    let response = await axiosInstance.get('masters');
     return response;
 };
 //-------------Put Masters--------------
 export const PutMasters = async (data: MasterType, id: string) => {
-    let response = await axiosInstance.put(`Masters/${id}`, data);
+    let response = await axiosInstance.put(`masters/${id}`, data);
     return response;
 };
 // export const PostMasters = async ({
@@ -67,10 +80,5 @@ export const DeleteMasters = async (id: string) => {
 //-------------Delete Tatoo--------------
 export const DeleteTatoo = async (id: string) => {
     let response = await axiosInstance.delete(`Tatoos/${id}`);
-    return response;
-};
-//-------------Delete Style--------------
-export const DeleteStyle = async (id: string) => {
-    let response = await axiosInstance.delete(`Styles/${id}`);
     return response;
 };

@@ -9,6 +9,7 @@ import instagramIcon from '../../public/svg/intragram.svg';
 import telegramIcon from '../../public/svg/telegram.svg';
 import Mainbtn from '@/components/Mainbtn';
 import MasterCard from '@/components/MasterCard';
+import Tooltip from '@/components/Tooltip/index';
 import Contact from '@/components/Contact';
 import Works from '@/components/Works';
 import Map from '@/components/map';
@@ -19,10 +20,12 @@ import { GetServerSideProps } from 'next';
 import { MasterType } from '@/Services/Types';
 import { chunkArray } from '@/Helpers/chunkArray';
 import ImageSlider from '@/components/ImageSlider';
-
+import { useState } from 'react';
+import Faq from '../components/Faq';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home(props: any) {
+    let [showAside, setshowaside] = useState(false);
     let ruter = useRouter();
     let { data } = props;
     let Master = chunkArray(data.Masters, 3);
@@ -32,8 +35,189 @@ export default function Home(props: any) {
             element.scrollIntoView({ behavior: 'smooth' });
         }
     };
+    const scrollToEl = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
     return (
         <>
+            {/* navbaricon */}
+            <div
+                onClick={() => setshowaside(true)}
+                className="bg-black rounded-full  fixed w-[60px] h-[60px] flex justify-center items-center top-2 right-2  z-[9999999]"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    width="30"
+                    height="30"
+                    viewBox="0,0,256,256"
+                >
+                    <g
+                        fill="#ffffff"
+                        fill-rule="nonzero"
+                        stroke="none"
+                        stroke-width="1"
+                        stroke-linecap="butt"
+                        stroke-linejoin="miter"
+                        stroke-miterlimit="10"
+                        stroke-dasharray=""
+                        stroke-dashoffset="0"
+                        font-family="none"
+                        font-weight="none"
+                        font-size="none"
+                        text-anchor="none"
+                    >
+                        <g transform="scale(5.12,5.12)">
+                            <path d="M5,8c-0.72127,-0.0102 -1.39216,0.36875 -1.75578,0.99175c-0.36361,0.623 -0.36361,1.39351 0,2.01651c0.36361,0.623 1.0345,1.00195 1.75578,0.99175h40c0.72127,0.0102 1.39216,-0.36875 1.75578,-0.99175c0.36361,-0.623 0.36361,-1.39351 0,-2.01651c-0.36361,-0.623 -1.0345,-1.00195 -1.75578,-0.99175zM5,23c-0.72127,-0.0102 -1.39216,0.36875 -1.75578,0.99175c-0.36361,0.623 -0.36361,1.39351 0,2.01651c0.36361,0.623 1.0345,1.00195 1.75578,0.99175h40c0.72127,0.0102 1.39216,-0.36875 1.75578,-0.99175c0.36361,-0.623 0.36361,-1.39351 0,-2.01651c-0.36361,-0.623 -1.0345,-1.00195 -1.75578,-0.99175zM5,38c-0.72127,-0.0102 -1.39216,0.36875 -1.75578,0.99175c-0.36361,0.623 -0.36361,1.39351 0,2.01651c0.36361,0.623 1.0345,1.00195 1.75578,0.99175h40c0.72127,0.0102 1.39216,-0.36875 1.75578,-0.99175c0.36361,-0.623 0.36361,-1.39351 0,-2.01651c-0.36361,-0.623 -1.0345,-1.00195 -1.75578,-0.99175z"></path>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            {/* navbaricon */}
+            {/* navbar */}
+            <div
+                className="w-full h-[100vh] fixed bg-black bg-opacity-40 z-[9999999] flex justify-end"
+                style={showAside ? { display: 'flex' } : { display: 'none' }}
+            >
+                <div
+                    onClick={() => setshowaside(false)}
+                    className=" w-full h-[100vh]"
+                ></div>
+                <aside className=" w-[300px] h-[100vh] bg-black  right-0 px-10 py-12 flex flex-col  justify-between">
+                    <svg
+                        onClick={() => setshowaside(false)}
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="40"
+                        height="40"
+                        viewBox="0,0,300,150"
+                        className=" absolute top-2 right-2 cursor-pointer"
+                    >
+                        <g
+                            fill="#ffffff"
+                            fill-rule="nonzero"
+                            stroke="none"
+                            stroke-width="1"
+                            stroke-linecap="butt"
+                            stroke-linejoin="miter"
+                            stroke-miterlimit="10"
+                            stroke-dasharray=""
+                            stroke-dashoffset="0"
+                            font-family="none"
+                            font-weight="none"
+                            font-size="none"
+                            text-anchor="none"
+                        >
+                            <g transform="scale(5.12,5.12)">
+                                <path d="M9.15625,6.3125l-2.84375,2.84375l15.84375,15.84375l-15.9375,15.96875l2.8125,2.8125l15.96875,-15.9375l15.9375,15.9375l2.84375,-2.84375l-15.9375,-15.9375l15.84375,-15.84375l-2.84375,-2.84375l-15.84375,15.84375z"></path>
+                            </g>
+                        </g>
+                    </svg>
+                    <div className=" flex flex-col text-white font-sans text-[18px]  uppercase tracking-[1.5] gap-4">
+                        <h2
+                            className="duration-[.5s] hover:text-grey cursor-pointer"
+                            onClick={() => {
+                                scrollToEl('phelosophy'), setshowaside(false);
+                            }}
+                        >
+                            Философия
+                        </h2>
+                        <h2
+                            className="duration-[.5s] hover:text-grey cursor-pointer"
+                            onClick={() => {
+                                scrollToEl('masters'), setshowaside(false);
+                            }}
+                        >
+                            мастера
+                        </h2>
+                        <h2
+                            className="duration-[.5s] hover:text-grey cursor-pointer"
+                            onClick={() => {
+                                scrollToEl('contact'), setshowaside(false);
+                            }}
+                        >
+                            ЗАПИСАТЬСЯ
+                        </h2>
+                        <h2
+                            className="duration-[.5s] hover:text-grey cursor-pointer"
+                            onClick={() => {
+                                scrollToEl('works'), setshowaside(false);
+                            }}
+                        >
+                            работы
+                        </h2>
+                        <h2
+                            className="duration-[.5s] hover:text-grey cursor-pointer"
+                            onClick={() => {
+                                scrollToEl('FAQ'), setshowaside(false);
+                            }}
+                        >
+                            F.A.Q.
+                        </h2>
+
+                        <h2
+                            className="duration-[.5s] hover:text-grey cursor-pointer"
+                            onClick={() => {
+                                scrollToEl('map'), setshowaside(false);
+                            }}
+                        >
+                            местоположения
+                        </h2>
+                    </div>
+                    <div className="flex flex-row gap-4 ">
+                        <a href="https://wa.me/+9940552660728">
+                            <div className="bg-white  rounded-full w-[30px] h-[30px] flex justify-center items-center ">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="#000000"
+                                    width="20px"
+                                    height="20px"
+                                    viewBox="-1.66 0 740.824 740.824"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"
+                                    />
+                                </svg>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/mah0o00">
+                            <div className="bg-white  rounded-full w-[30px] h-[30px] flex justify-center items-center ">
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 34 34"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M10.3019 0.552612C4.95639 0.552612 0.608154 4.85902 0.608154 10.1496V23.8557C0.608154 29.1449 4.96041 33.4474 10.3073 33.4474H24.1594C29.5049 33.4474 33.8531 29.1409 33.8531 23.8504V10.1442C33.8531 4.85503 29.5009 0.552612 24.154 0.552612H10.3019ZM26.9271 6.03507C27.6917 6.03507 28.3123 6.6491 28.3123 7.40568C28.3123 8.16226 27.6917 8.7763 26.9271 8.7763C26.1625 8.7763 25.5419 8.16226 25.5419 7.40568C25.5419 6.6491 26.1625 6.03507 26.9271 6.03507ZM17.2306 8.7763C21.8143 8.7763 25.5419 12.4646 25.5419 17C25.5419 21.5353 21.8143 25.2237 17.2306 25.2237C12.647 25.2237 8.9194 21.5353 8.9194 17C8.9194 12.4646 12.647 8.7763 17.2306 8.7763ZM17.2306 11.5175C15.7611 11.5175 14.3518 12.0951 13.3127 13.1233C12.2736 14.1515 11.6898 15.5459 11.6898 17C11.6898 18.454 12.2736 19.8485 13.3127 20.8767C14.3518 21.9048 15.7611 22.4824 17.2306 22.4824C18.7002 22.4824 20.1095 21.9048 21.1486 20.8767C22.1877 19.8485 22.7715 18.454 22.7715 17C22.7715 15.5459 22.1877 14.1515 21.1486 13.1233C20.1095 12.0951 18.7002 11.5175 17.2306 11.5175Z"
+                                        fill="black"
+                                    />
+                                </svg>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div className="bg-white  rounded-full w-[30px] h-[30px] flex justify-center items-center ">
+                                <Image
+                                    src={telegramIcon}
+                                    alt=""
+                                    width={20}
+                                    height={20}
+                                />
+                            </div>
+                        </a>
+                    </div>
+                </aside>
+            </div>
+            {/* navbar */}
+            {/* head */}
             <div className=" relative">
                 {/* <Image
                     src={HeadBg}
@@ -127,6 +311,8 @@ export default function Home(props: any) {
                     /> */}
                 </div>
             </div>
+            {/* head*/}
+            {/* cost  */}
             <div
                 className="w-full bg-black  flex  justify-center"
                 id="target-div"
@@ -189,8 +375,9 @@ export default function Home(props: any) {
                     </a>
                 </div>
             </div>
-
-            <div className="w-full  bg-black flex flex-row">
+            {/* cost  */}
+            {/* phelosophy  */}
+            <div className="w-full  bg-black flex flex-row" id="phelosophy">
                 <div className="w-1/2 flex justify-center">
                     <div className="w-full  relative">
                         <Image
@@ -205,7 +392,7 @@ export default function Home(props: any) {
                 <div className="w-1/2  flex items-center">
                     <div className=" flex flex-col  m-[10%] mb-0">
                         <h5 className=" text-white font-circe font-[400] text-[36px] tracking-[2px] mt-3">
-                            ФИЛАСОФИЯ
+                            ФИЛOСОФИЯ
                         </h5>
                         <h6 className="text-white  font-[200] text-[18px] font-circe leading-[1.8]  max-w-[500px] mt-6">
                             TATOO-APP - это возможность записаться на прием
@@ -234,8 +421,13 @@ export default function Home(props: any) {
                     </div>
                 </div>
             </div>
+            {/* phelosophy  */}
+            {/* MAsters  */}
 
-            <div className="  w-full flex flex-col items-center mb-8">
+            <div
+                className="  w-full flex flex-col items-center mb-8"
+                id="masters"
+            >
                 <h1 className="text-black font-sans font-[700] text-[40px] mt-12 tracking-[1.5px]">
                     НАША КОМАНДА
                 </h1>
@@ -254,6 +446,9 @@ export default function Home(props: any) {
                     </div>
                 ))}
             </div>
+            {/* MAsters  */}
+            {/* styles  */}
+
             <div className="w-full flex flex-col items-center mt-11 mb-[90px]">
                 <h2 className="text-black font-circe font-[700]  text-[40px]  tracking-[1.5px] ">
                     СТИЛИ И СЮЖЕТЫ
@@ -273,12 +468,19 @@ export default function Home(props: any) {
                     }}
                 />
             </div>
+            {/* styles  */}
 
             <Contact />
 
             <Works data={data?.Tatoos} />
-
-            <div className="bg-black w-full h-fit  flex flex-col gap-9 items-center py-[120px]">
+            <h1 className="text-black text-[36px] font-sans font-[700] text-center mt-16">
+                F.A.Q.
+            </h1>
+            <Faq />
+            <div
+                className="bg-black w-full h-fit  flex flex-col gap-9 items-center py-[120px]"
+                id="map"
+            >
                 <h5 className="text-white font-sans font-[500] w-[580px] text-[36px] text-center">
                     Новодмитровская ул., д. 1, стр. 1, Москва, метро Дмитровская
                 </h5>
@@ -286,16 +488,65 @@ export default function Home(props: any) {
                 <h5 className="text-white font-sans font-[300] text-[24px]">
                     Мы открыты: 12:00 – 20:00, без выходных
                 </h5>
+                <div className="flex flex-row gap-1 ">
+                    <a href="https://wa.me/+9940552660728">
+                        <div className="  rounded-full w-[50px] h-[50px] flex justify-center items-center ">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#ffffff"
+                                width="28px"
+                                height="28px"
+                                viewBox="-1.66 0 740.824 740.824"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"
+                                />
+                            </svg>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/mah0o00">
+                        <div className=" rounded-full w-[50px] h-[50px] flex justify-center items-center ">
+                            <svg
+                                width="28"
+                                height="28"
+                                viewBox="0 0 34 34"
+                                fill="#ffffff"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M10.3019 0.552612C4.95639 0.552612 0.608154 4.85902 0.608154 10.1496V23.8557C0.608154 29.1449 4.96041 33.4474 10.3073 33.4474H24.1594C29.5049 33.4474 33.8531 29.1409 33.8531 23.8504V10.1442C33.8531 4.85503 29.5009 0.552612 24.154 0.552612H10.3019ZM26.9271 6.03507C27.6917 6.03507 28.3123 6.6491 28.3123 7.40568C28.3123 8.16226 27.6917 8.7763 26.9271 8.7763C26.1625 8.7763 25.5419 8.16226 25.5419 7.40568C25.5419 6.6491 26.1625 6.03507 26.9271 6.03507ZM17.2306 8.7763C21.8143 8.7763 25.5419 12.4646 25.5419 17C25.5419 21.5353 21.8143 25.2237 17.2306 25.2237C12.647 25.2237 8.9194 21.5353 8.9194 17C8.9194 12.4646 12.647 8.7763 17.2306 8.7763ZM17.2306 11.5175C15.7611 11.5175 14.3518 12.0951 13.3127 13.1233C12.2736 14.1515 11.6898 15.5459 11.6898 17C11.6898 18.454 12.2736 19.8485 13.3127 20.8767C14.3518 21.9048 15.7611 22.4824 17.2306 22.4824C18.7002 22.4824 20.1095 21.9048 21.1486 20.8767C22.1877 19.8485 22.7715 18.454 22.7715 17C22.7715 15.5459 22.1877 14.1515 21.1486 13.1233C20.1095 12.0951 18.7002 11.5175 17.2306 11.5175Z"
+                                    fill="white"
+                                />
+                            </svg>
+                        </div>
+                    </a>
+                    <a href="">
+                        <div className="  rounded-full w-[50px] h-[50px] flex justify-center items-center ">
+                            <svg
+                                role="presentation"
+                                width="32px"
+                                height="32px"
+                                viewBox="0 0 100 100"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M83.1797 17.5886C83.1797 17.5886 90.5802 14.7028 89.9635 21.711C89.758 24.5968 87.9079 34.6968 86.4688 45.6214L81.5351 77.9827C81.5351 77.9827 81.124 82.7235 77.4237 83.548C73.7233 84.3724 68.173 80.6623 67.145 79.8378C66.3227 79.2195 51.7273 69.9438 46.5878 65.4092C45.1488 64.1724 43.5042 61.6989 46.7934 58.8132L68.3785 38.201C70.8454 35.7274 73.3122 29.956 63.0336 36.9642L34.2535 56.5459C34.2535 56.5459 30.9644 58.6071 24.7973 56.752L11.4351 52.6295C11.4351 52.6295 6.50135 49.5377 14.9298 46.4457C35.4871 36.7579 60.7724 26.864 83.1797 17.5886Z"
+                                    fill="#ffffff"
+                                ></path>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
             </div>
-            {/*
-            <a
-                href="https://www.google.com/maps/place/Tattoo+%26+Coffee+(Tin+Too)/@10.025635,105.7736981,17.69z/data=!40m6!3m5!1s0x31a0883e83ee58eb:0x22defee7d3b6a056!8m2!3d10.0256019!4d105.7748851!16s%2Fg%2F11g7292s04?entry=ttu"
-                className="w-full h-[500px] flex justify-center items-center overflow-hidden"
-            >
-                <Image src={mapImg} alt="a" className="w-full" />
-            </a>
-           
-            <Footer /> */}
+            <Map />
+            {/* <div className="w-[60px] h-[60px] fixed bottom-6 right-6 z-[99999999]">
+                <Tooltip />
+            </div> */}
+
+            <Footer />
         </>
     );
 }

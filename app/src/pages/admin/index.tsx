@@ -25,6 +25,7 @@ import {
 import Panel2 from '@/components/Panel2';
 import { ToastContainer } from 'react-toastify';
 import DeletePanlet from '@/components/DeletePanlet';
+import { shortenText } from '@/Helpers/utils';
 
 export default function index() {
     let [RequestReset, setRequestReset] = useState<boolean>(false);
@@ -42,15 +43,15 @@ export default function index() {
     useEffect(() => {
         (async () => {
             let StyleRes = await GetStyle();
-            let MastersRes = await GetMasters();
-            let TatooRes = await GetTatoo();
+            // let MastersRes = await GetMasters();
+            // let TatooRes = await GetTatoo();
             let Style = StyleRes.data;
-            let Masters = MastersRes.data;
-            let Tatoo = TatooRes.data;
+            // let Masters = MastersRes.data;
+            // let Tatoo = TatooRes.data;
             let data = {
                 Style,
-                Masters,
-                Tatoo,
+                // Masters,
+                // Tatoo,
             };
             setData(data);
         })();
@@ -172,7 +173,7 @@ export default function index() {
                     </button>
                 </div>
                 <div className=" mt-6 flex flex-row flex-wrap gap-6 justify-center">
-                    {Data?.Tatoo.map((item: TatoTypeBase) => (
+                    {Data?.Tatoo?.map((item: TatoTypeBase) => (
                         <div className="bg-white relative w-[304px] h-[114px] border-black border-2 flex flex-row items-center">
                             {/* <Image src={image} alt='skd' className=' w-[110px]  h-[110px]'/> */}
                             <img
@@ -181,7 +182,7 @@ export default function index() {
                                 className=" w-[110px]  h-[110px]"
                             />
                             <div className="h-fit ml-2">
-                                <h1 className="text-[32px] font-sans font-[600] mb-1">
+                                <h1 className="text-[32px] font-sans text-black font-[600] mb-1">
                                     {item.master}
                                 </h1>
                                 <p className="text-[24px] text-[#696969] font-sans font-[500]">
@@ -221,22 +222,34 @@ export default function index() {
                     {Data?.Style.map((item: any) => (
                         <div className="bg-white relative w-[380px] h-[90px] flex flex-row items-center">
                             <div className="h-fit ml-2">
-                                <h1 className="text-[40px] font-sans font-[600] ">
-                                    {item.name}
+                                <h1 className="text-[40px] text-black font-sans font-[600] ">
+                                    {shortenText(item.name, 15)}
                                 </h1>
                                 <p className="text-[28px] text-[#696969] font-sans font-[500]">
-                                    {item.desc}
+                                    {shortenText(item.desc, 30)}
                                 </p>
                             </div>
                             <div className="w-1/5  absolute top-2 right-2 flex flex-row gap-2 pr-4">
-                                <Image src={EditIcon} alt="EditIcon" />
+                                <Image
+                                    src={EditIcon}
+                                    alt="EditIcon"
+                                    onClick={() => {
+                                        dispatch(
+                                            seteditData({
+                                                ColloctionName: 'Styles',
+                                                data: item,
+                                            })
+                                        );
+                                        dispatch(setshowpanel3(true));
+                                    }}
+                                />
                                 <Image
                                     src={DeleteIcon}
                                     alt="DeleteIcon"
                                     onClick={() => {
                                         setDeleteobj({
                                             collectionName: 'Styles',
-                                            id: item.id,
+                                            id: item._id,
                                         }),
                                             setDeletepanel(true);
                                     }}

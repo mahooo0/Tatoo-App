@@ -2,7 +2,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 type editData = {
-    ColloctionName: string;
+    ColloctionName: 'Masters' | 'Styles' | 'Tatoos';
     data: any;
 };
 interface State {
@@ -39,7 +39,7 @@ const exampleSlice = createSlice({
         reset(state) {
             state.RequestReset = !state.RequestReset;
         },
-        seteditData(state, action: PayloadAction<editData>) {
+        seteditData(state, action: PayloadAction<editData | undefined>) {
             state.editData = action.payload;
         },
         ReseteditData(state) {

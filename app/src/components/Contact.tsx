@@ -3,7 +3,10 @@ import Mainbtn from './Mainbtn';
 
 function Contact() {
     return (
-        <div className=" bg-black w-full flex flex-col items-center pb-8 pt-[60px]">
+        <div
+            className=" bg-black w-full flex flex-col items-center pb-8 pt-[60px] "
+            id="contact"
+        >
             <h1 className="font-sans font-[700] text-[36px] mt-8 text-white">
                 КАК ЗАПИСАТЬСЯ
             </h1>

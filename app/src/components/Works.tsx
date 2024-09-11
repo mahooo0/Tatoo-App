@@ -10,7 +10,7 @@ interface Props {
 export default function Works(props: Props) {
     let { data } = props;
     return (
-        <div className="bg-black w-full flex flex-col items-center">
+        <div className="bg-black w-full flex flex-col items-center" id="works">
             <h1 className="font-sans font-[700] text-[36px] mt-8 text-white">
                 РАБОТЫ
             </h1>

@@ -26,8 +26,8 @@ const MasterCard = (props: Props) => {
             <div
                 className={
                     IsOn
-                        ? 'w-full absolute opacity-100 translate-y-0 transition-all ease-in-out duration-[.5s] z-20 bg-buler-black flex flex-col justify-end  items-center  bottom-0 h-1/2'
-                        : 'w-full absolute opacity-0  translate-y-6  transition-all ease-in-out duration-[.5s] z-20 bg-buler-black flex flex-col justify-end  items-center  bottom-0 h-1/2'
+                        ? 'w-full absolute opacity-100  transition-all ease-in-out duration-[.5s] z-20 bg-buler-black flex flex-col justify-end  items-center  bottom-0 h-1/2'
+                        : 'w-full absolute opacity-0   transition-all ease-in-out duration-[.5s] z-20 bg-buler-black flex flex-col justify-end  items-center  bottom-0 h-1/2'
                 }
             >
                 <h5
